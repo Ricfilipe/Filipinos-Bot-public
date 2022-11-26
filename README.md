@@ -12,6 +12,7 @@ Link to article on SitePoint: [https://www.sitepoint.com/discord-bot-node-js/](h
 ## Installation Steps (if applicable)
 
 1. Clone repo
+2. Run 'cd Filipinos-Bot'
 2. Run `npm install`
 3. Add Discord and other credentials in a `.env` file
 3. Run `node index.js`
