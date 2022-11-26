@@ -5,6 +5,7 @@ description: Filipinos Discord Bot
 url: https://github.com/Ricfilipe/Filipinos-Bot-public
 codenotary: notary@home-assistant.io
 advanced: true
+init: false
 arch:
   - armhf
   - armv7

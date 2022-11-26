@@ -1,4 +1,5 @@
-FROM node
+ARG BUILD_FROM
+FROM $BUILD_FROM
 
 # Copy data for add-on
 COPY Commands/ /Commands/
@@ -11,7 +12,7 @@ COPY package-lock.json /
 COPY Procfile /
 COPY discord-bot-sitepoint.iml /
 COPY run.sh /
+RUN apk add --no-cache  nodejs=16.16.0-r0  npm=8.16.0-r0
 RUN cd / && npm install
-RUN chmod a+x /run.sh
 
 CMD [ "/run.sh" ]
