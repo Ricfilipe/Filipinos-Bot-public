@@ -1,9 +1,9 @@
 FROM node
 
 # Copy data for add-on
-COPY ../Commands/* /
-COPY ../GraphQL/* /
-COPY ../Modules/* /
+COPY ../Commands/ /Commands/
+COPY ../GraphQL/ /GraphQL/
+COPY ../Modules/ /Modules/
 COPY ../CommandLoader.js /
 COPY ../index.js /
 COPY ../package.json /
