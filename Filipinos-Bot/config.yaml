@@ -1,0 +1,22 @@
+version: 1.0.0
+slug: filipinos_bot
+name: Filipinos Bot
+description: Filipinos Discord Bot
+url: https://github.com/Ricfilipe/Filipinos-Bot
+codenotary: notary@home-assistant.io
+advanced: true
+arch:
+  - armhf
+  - armv7
+  - aarch64
+  - amd64
+  - i386
+host_network: true
+
+options:
+  discord_token: TOKEN
+  mongodb_token: mongodb+srv://<user>:<pass>@<cluster>/<dbname>?retryWrites=true&w=majority
+schema:
+  mongodb_token: str
+  discord_token: str
+

@@ -1,0 +1,50 @@
+
+
+
+ query{
+    user: User(name: "Guifas"){
+        id
+        name
+        about
+        siteUrl
+        donatorTier
+        avatar{
+            medium
+        }
+        options{
+            profileColor
+        }
+        statistics{
+            anime{
+                count
+                genres{
+                    genre
+                    count
+                }
+            }
+        }
+    }
+    Page(page: 1,perPage: 10){
+        pageInfo{
+            total
+            currentPage
+            lastPage
+            hasNextPage
+            perPage
+        }
+        activities(userId: 402454,type_in: [ANIME_LIST,MANGA_LIST],sort: [ID_DESC]){
+            ...on ListActivity{
+                status
+                progress
+                media{
+                    title{
+                        english
+                        romaji
+                    }
+
+                }
+            }
+        }
+    }
+}
+

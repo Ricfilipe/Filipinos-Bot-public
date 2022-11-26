@@ -1,0 +1,32 @@
+{
+  "name": "inspire-bot",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "start": "node index.js"
+  },
+  "author": "Michiel Mulders",
+  "license": "ISC",
+  "dependencies": {
+    "@discordjs/voice": "^0.10.0",
+    "@octokit/core": "^3.2.5",
+    "axios": "^0.21.1",
+    "discord.js": "^13.8.0",
+    "dotenv": "^8.2.0",
+    "http-parser-js": "^0.5.2",
+    "mongodb": "^3.6.4",
+    "nodemon": "^2.0.2",
+    "request": "^2.88.2",
+    "request-promise-native": "^1.0.9"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Ricfilipe/discord-bot-sitepoint.git"
+  },
+  "keywords": [],
+  "bugs": {
+    "url": "https://github.com/Ricfilipe/discord-bot-sitepoint/issues"
+  },
+  "homepage": "https://github.com/Ricfilipe/discord-bot-sitepoint#readme"
+}
