@@ -15,8 +15,15 @@ host_network: true
 
 options:
   discord_token: TOKEN
-  mongodb_token: mongodb+srv://<user>:<pass>@<cluster>/<dbname>?retryWrites=true&w=majority
+  github_token: TOKEN
+  mongo_user: user
+  mongo_pass: pass
+  trakt_api_key: API_KEY
+  watch_party_api: API_KEY
 schema:
-  mongodb_token: str
+  mongo_user: str
+  mongo_pass: str
   discord_token: str
-
+  github_token: str
+  trakt_api_key: str
+  watch_party_api: str
