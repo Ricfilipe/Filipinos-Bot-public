@@ -35,5 +35,5 @@ RUN \
         patch=2.7.6-r7
 
 RUN cd / && npm install
-
+RUN chmod a+x /run.sh
 CMD [ "/run.sh" ]
