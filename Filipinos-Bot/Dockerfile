@@ -18,21 +18,22 @@ COPY run.sh /
 
 RUN \
     apk add --no-cache --virtual .build-dependencies \
-        g++=11.2.1_git20220219-r2 \
-        gcc=11.2.1_git20220219-r2 \
+        g++=12.2.1_git20220924-r4 \
+        gcc=12.2.1_git20220924-r4 \
         libc-dev=0.7.2-r3 \
-        linux-headers=5.16.7-r1 \
-        make=4.3-r0 \
-        py3-pip=22.1.1-r0 \
-        python3-dev=3.10.8-r0 \
-        python3=3.10.8-r0 \
+        linux-headers=5.19.5-r0 \
+        make=4.3-r1 \
+        py3-pip=22.3.1-r1 \
+        python3-dev=3.10.9-r1 \
+        python3=3.10.9-r1 \
     \
     && apk add --no-cache \
-        git=2.36.3-r0 \
-        icu-data-full=71.1-r2 \
-        nodejs=16.17.1-r0 \
-        npm=8.10.0-r0 \
-        patch=2.7.6-r7
+        git=2.38.2-r0 \
+        icu-data-full=72.1-r1 \
+        nodejs=18.12.1-r0 \
+        npm=9.1.2-r0 \
+        patch=2.7.6-r7\
+        ffmpeg=2.8.11-r0
 
 RUN cd / && npm install
 RUN chmod a+x /run.sh
