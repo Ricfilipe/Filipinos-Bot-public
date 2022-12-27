@@ -28,12 +28,12 @@ RUN \
         python3=3.10.9-r0
 
 RUN apk add --no-cache \
-        git=2.38.2-r0 \
-        icu-data-full=72.1-r1 \
-        nodejs=18.12.1-r0 \
-        npm=9.1.2-r0 \
+        git=2.36.3-r0 \
+        icu-data-full=71.1-r2 \
+        nodejs=18.9.1-r0 \
+        npm=8.10.0-r0 \
         patch=2.7.6-r7\
-        ffmpeg=2.8.11-r0
+        ffmpeg=5.0.1-r1
 
 RUN cd / && npm install
 RUN chmod a+x /run.sh
