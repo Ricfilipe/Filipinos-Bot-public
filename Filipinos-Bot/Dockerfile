@@ -30,7 +30,7 @@ RUN \
 RUN apk add --no-cache \
         git=2.36.3-r0 \
         icu-data-full=71.1-r2 \
-        nodejs=18.9.1-r0 \
+        nodejs=16.17.1-r0 \
         npm=8.10.0-r0 \
         patch=2.7.6-r7\
         ffmpeg=5.0.1-r1
