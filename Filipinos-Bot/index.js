@@ -3,6 +3,9 @@ const {Client,GatewayIntentBits, Partials }= require('discord.js');
 const bot = new Client({ intents: [GatewayIntentBits.Guilds, GatewayIntentBits.GuildMessages, GatewayIntentBits.GuildVoiceStates] });
 const TOKEN = process.env.TOKEN;
 
+var pathToFfmpeg = require('ffmpeg-static');
+console.log(pathToFfmpeg);
+
 const AdministrationDB = require('./Modules/Connections/AdministrationDB');
 const CommandLoader = require('./CommandLoader');
 const gambling = require('./Modules/gambling');

@@ -29,33 +29,12 @@ module.exports= {
 
         if(member.voice.channel)
         {
-            const query = interaction.options.getString("query");
-            const queue = player.createQueue(interaction.guild, {
-                metadata: {
-                    channel: interaction.channel
-                }
-            });
+            player.play(member.voice.channel, interaction.options.getString("query") , {
+                member: member,
+                textChannel: interaction.channel
+            })
 
-            try {
-                if (!queue.connection) await queue.connect(interaction.member.voice.channel);
-            } catch {
-                queue.destroy();
-                return { content: "Could not join your voice channel!", ephemeral: true };
-            }
-
-            const track = await player.search(query, {
-                requestedBy: interaction.user
-            }).then(x => x.tracks[0]);
-            if (!track) return { content: `❌ | Track **${query}** not found!`};
-
-            queue.play(track);
-
-            const embed =  new EmbedBuilder();
-            embed.setAuthor({name:"Filipinos-Bot",iconURL:guild.iconURL()})
-                .setTitle("All Requested Features")
-
-
-            return {content:`Playing!`, ephemeral:true};
+            return {content:`playing`, ephemeral:true};
         }
 
         return  {content:`You need to enter voice channel!`, ephemeral:true};
