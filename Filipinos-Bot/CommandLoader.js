@@ -7,8 +7,6 @@ const AdministrationDB = require('./Modules/Connections/AdministrationDB');
 const {Player} = require("discord-player");
 const { REST, Routes } = require('discord.js');
 const { DisTube } = require('distube')
-const { SpotifyPlugin } = require('@distube/spotify')
-const { SoundCloudPlugin } = require('@distube/soundcloud')
 const { YtDlpPlugin } = require('@distube/yt-dlp')
 const TOKEN = process.env.TOKEN;
 const owner = '136894756985896960';
@@ -22,10 +20,6 @@ module.exports =class CommandLoader{
             emitAddSongWhenCreatingQueue: false,
             emitAddListWhenCreatingQueue: false,
             plugins: [
-                new SpotifyPlugin({
-                    emitEventsAfterFetching: true
-                }),
-                new SoundCloudPlugin(),
                 new YtDlpPlugin()
             ]
         })
