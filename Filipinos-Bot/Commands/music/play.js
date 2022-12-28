@@ -1,6 +1,8 @@
 
 const {EmbedBuilder, SlashCommandBuilder} = require("discord.js");
 const {joinVoiceChannel} = require("@discordjs/voice");
+const SearchResultType = require("distube");
+const SearchResult = require("distube");
 
 
 
@@ -29,12 +31,26 @@ module.exports= {
 
         if(member.voice.channel)
         {
-            player.play(member.voice.channel, interaction.options.getString("query") , {
+            const song = await player.search(interaction.options.getString("query"),
+                {
+                    limit: 1,
+                    safeSearch: false
+                });
+
+            player.play(member.voice.channel, song , {
                 member: member,
                 textChannel: interaction.channel
             })
 
-            return {content:`playing`, ephemeral:true};
+            const embed = new EmbedBuilder()
+                .setAuthor({name:"Added music to queue",iconURL:guild.iconURL()})
+                .setTitle(song[0].name)
+                .setURL(song[0].url)
+                .setThumbnail(song[0].thumbnail)
+                .setFooter({text:"Requested by " + member.displayName, iconURL: user.avatarURL()})
+                .setDescription("Duration: " + song[0].formattedDuration)
+
+            return {embeds:[embed]};
         }
 
         return  {content:`You need to enter voice channel!`, ephemeral:true};
