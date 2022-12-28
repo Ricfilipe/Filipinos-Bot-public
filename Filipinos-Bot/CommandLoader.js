@@ -1,12 +1,12 @@
 
-
+require('dotenv').config();
 const fs = require('fs');
 const path = require('path');
-const DiscordJS = require("discord.js");
 const responseInterface = require('./Modules/response')
 const AdministrationDB = require('./Modules/Connections/AdministrationDB');
 const {Player} = require("discord-player");
-
+const { REST, Routes } = require('discord.js');
+const TOKEN = process.env.TOKEN;
 const owner = '136894756985896960';
 
 module.exports =class CommandLoader{
@@ -15,6 +15,8 @@ module.exports =class CommandLoader{
         this.player = new Player(client);
 
         this.buttons = {}
+
+        this.rest = new REST({ version: '10' }).setToken(TOKEN);
 
         this.guilds = guilds
         if (!client) {
@@ -158,11 +160,26 @@ async function postPermissions(client,command,id,guildID){
     })
 }
 
-async function bulkCommands(client,functions,cmdLoader,guildID){
+async function bulkCommands(client,functions,cmdLoader,guildID,rest){
     const commands = [];
     for (const [key, value] of Object.entries(functions)) {
         let command = value.json
         commands.push(command)
+    }
+
+    try {
+        console.log(`Started refreshing ${commands.length} application (/) commands.`);
+
+        // The put method is used to fully refresh all commands in the guild with the current set
+        const data = await cmdLoader.rest.put(
+            Routes.applicationCommands(client.user.id),
+            { body: commands },
+        );
+
+        console.log(`Successfully reloaded ${data.length} application (/) commands.`);
+    } catch (error) {
+        // And of course, make sure you catch and log any errors!
+        console.error(error);
     }
 
     return commands
