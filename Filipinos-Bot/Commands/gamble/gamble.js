@@ -37,7 +37,7 @@ module.exports= {
             }]
     },
     callback: async ({client, interaction, args, guild, member, user,commandLoader}) => {
-        console.log(member.guild.nick)
+        return {content:`WIP...`, ephemeral:true};
         let name = member.guild.nick || member.user.username;
         let id = user.id;
         let time = args.getInteger("time");
@@ -55,7 +55,7 @@ module.exports= {
 
             let gambleEmbed = createEmbedGamba(user,title,time,choices);
             const gambaCommands = generateCommands(user.id,guild.id)
-            commandID = (await commandLoader.addCommands(client,gambaCommands,guild.id))
+            commandID = (commandLoader.addCommands(client,gambaCommands,guild.id))
 
             currentGamba[guild.id] = new GambleEntity(id,user,title,time,choices,interaction,client);
             currentGamba[guild.id].interval = setInterval(update,updateTime*1000,client,interaction,currentGamba[guild.id]);
@@ -265,7 +265,7 @@ async function gamba(interaction) {
             index = index + 1
         }
 
-        const choiceSelector = new MessageSelectMenu()
+        const choiceSelector = new TextInputComponent()
             .setCustomId('choice')
             .addOptions(options);
 

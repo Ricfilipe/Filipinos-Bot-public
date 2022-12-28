@@ -71,8 +71,7 @@ module.exports= class  shopMute extends shopItem {
                 }else{
                     func.apply(null, [param])
                 }
-                console.log(counter/1000)
-                counter = counter+100;
+                counter = counter+500;
             },100)
 
     }
@@ -82,7 +81,7 @@ module.exports= class  shopMute extends shopItem {
 
 function     mutePerson(param){
     if(!param[0].voice.serverMute){
-        param[0].voice.setMute(true,"I am just a mercenary");
+         param[0].voice.setMute(true,"I am just a mercenary");
     }
 
 }

@@ -31,7 +31,7 @@ module.exports =class CommandLoader{
         bulkCommands(client,this.functions,this);
 
         client.on('interactionCreate', async (interaction)=>{
-            if (interaction.isCommand()) {
+            if (interaction.isCommand() || interaction.isUserContextMenu()) {
 
 
                 const options = interaction.options;
@@ -160,7 +160,7 @@ async function bulkCommands(client,functions,cmdLoader,guildID){
         bulk.push(value.json)
     }
     const app = getApp(client,guildID);
-    const commands = await app.commands.put({data:bulk});
+    const commands = await client.api.applications(client.user.id).commands.put({data:bulk});
 
     console.log("Ready to receive commands!")
     const commandID = [];

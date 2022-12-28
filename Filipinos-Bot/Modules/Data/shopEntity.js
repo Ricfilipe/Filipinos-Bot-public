@@ -37,7 +37,7 @@ module.exports= class shopEntity{
 
     }
 
-    buy(item, args,client,user,guild,member,interaction){
+        buy(item, args,client,user,guild,member,interaction){
         if(!this.shopItens.has(item)){
             return "Item not found in shop list";
         }
