@@ -1,4 +1,4 @@
-const { MessageEmbed } = require('discord.js');
+const { EmbedBuilder } = require('discord.js');
 const AdministrationDB = require('./Connections/AdministrationDB');
 
 const owner = '136894756985896960';

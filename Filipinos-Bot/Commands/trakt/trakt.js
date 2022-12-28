@@ -1,4 +1,4 @@
-const { MessageEmbed } = require('discord.js');
+const { EmbedBuilder } = require('discord.js');
 const request = require('request-promise-native');
 require('dotenv').config();
 const TRAKT_API_KEY = process.env.TRAKT_API_KEY;
@@ -68,7 +68,7 @@ module.exports= {
             const jsonProfile = JSON.parse(bodyProfile);
             const jsonStats = JSON.parse(bodyStats);
             embed= "worked";
-            embed = new MessageEmbed();
+            embed = new EmbedBuilder();
             embed.setAuthor({name:"Trakt.tv",iconURL:"https://trakt.tv/assets/logos/header@2x-d6926a2c93734bee72c5813819668ad494dbbda651457cd17d15d267bc75c657.png"})
                 .setURL("https://trakt.tv/users/"+args.getString("name"))
                 .setTitle(jsonProfile.username + "'s Profile")

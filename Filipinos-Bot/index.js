@@ -1,6 +1,6 @@
 require('dotenv').config();
-const Discord = require('discord.js');
-const bot = new Discord.Client({ intents: [Discord.Intents.FLAGS.GUILD_MESSAGES] });
+const {Client,GatewayIntentBits, Partials }= require('discord.js');
+const bot = new Client({ intents: [GatewayIntentBits.Guilds, GatewayIntentBits.GuildMessages, GatewayIntentBits.GuildVoiceStates] });
 const TOKEN = process.env.TOKEN;
 
 const AdministrationDB = require('./Modules/Connections/AdministrationDB');

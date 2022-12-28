@@ -1,4 +1,4 @@
-const { MessageEmbed } = require('discord.js');
+const { EmbedBuilder } = require('discord.js');
 const request = require('request');
 const responseInterface = require("../../Modules/response")
 require('dotenv').config();
@@ -18,7 +18,7 @@ module.exports= {
 
     },
     callback: async ({client,interaction ,args,guild,member,user}) => {
-        let embed = new MessageEmbed();
+        let embed = new EmbedBuilder();
 
         if(!args.getString("url") || !args.getString("url").startsWith("https://www.youtube.com/watch?v=") &&
             !args.getString("url").startsWith("https://youtu.be/" )) {

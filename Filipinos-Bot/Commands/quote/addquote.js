@@ -1,5 +1,5 @@
 const QuoteDB = require('../../Modules/Connections/QuoteDB');
-const { MessageEmbed } = require('discord.js');
+const { EmbedBuilder } = require('discord.js');
 const Discord = require('discord.js');
 
 module.exports= {

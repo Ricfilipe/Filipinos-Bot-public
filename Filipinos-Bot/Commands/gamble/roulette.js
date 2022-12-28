@@ -1,5 +1,5 @@
 const GambleDB = require('../../Modules/Connections/GambleDB');
-const { MessageEmbed } = require('discord.js');
+const { EmbedBuilder } = require('discord.js');
 const GambleUser = require('../../Modules/Data/gambleUser');
 
 module.exports= {
@@ -21,7 +21,7 @@ module.exports= {
         if (guser.getPoints() < args.value) {
             text_response = user.tag+ " doesn't have enough points";
         } else {
-            const embed = new MessageEmbed().setAuthor({name:user.tag, iconURL:user.avatarURL()});
+            const embed = new EmbedBuilder().setAuthor({name:user.tag, iconURL:user.avatarURL()});
             if (roll()) {
                 embed.setDescription("Just won " + args.getInteger("value")+ " points!!! <:notBad:593836050703450112>").setColor('#0fff00')
                 guser.addPoints(args.getInteger("value"));

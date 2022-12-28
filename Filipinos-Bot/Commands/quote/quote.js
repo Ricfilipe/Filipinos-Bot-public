@@ -1,5 +1,5 @@
 const QuoteDB = require('../../Modules/Connections/QuoteDB');
-const { MessageEmbed } = require('discord.js');
+const { EmbedBuilder } = require('discord.js');
 
 module.exports= {
     json: {
@@ -16,7 +16,7 @@ module.exports= {
         const taggedUser = args.getUser('person');
 
         const quote = await QuoteDB.getQuote(taggedUser.id,guild.id);
-        const embed = new MessageEmbed().setAuthor({name:taggedUser.tag,iconURL:taggedUser.avatarURL()})
+        const embed = new EmbedBuilder().setAuthor({name:taggedUser.tag,iconURL:taggedUser.avatarURL()})
             .setDescription(quote[0])
             .setColor('#883434').setFooter({text:""+quote[1]});
        return {embeds:[embed]};

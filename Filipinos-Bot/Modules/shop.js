@@ -1,4 +1,4 @@
-const { MessageEmbed } = require('discord.js');
+const { EmbedBuilder } = require('discord.js');
 const ShopEntity= require('./Data/shopEntity');
 const GambleUser= require('./Data/gambleUser');
 

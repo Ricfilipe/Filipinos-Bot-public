@@ -5,11 +5,14 @@ const path = require('path');
 const DiscordJS = require("discord.js");
 const responseInterface = require('./Modules/response')
 const AdministrationDB = require('./Modules/Connections/AdministrationDB');
+const {Player} = require("discord-player");
 
 const owner = '136894756985896960';
 
 module.exports =class CommandLoader{
     constructor(client, commandDir,guilds) {
+
+        this.player = new Player(client);
 
         this.buttons = {}
 
@@ -53,7 +56,8 @@ module.exports =class CommandLoader{
                             guild: guild,
                             user: user,
                             member: member,
-                            commandLoader: this
+                            commandLoader: this,
+                            player: this.player
                         })
                     }
                 }
@@ -155,19 +159,13 @@ async function postPermissions(client,command,id,guildID){
 }
 
 async function bulkCommands(client,functions,cmdLoader,guildID){
-    const bulk = [];
+    const commands = [];
     for (const [key, value] of Object.entries(functions)) {
-        bulk.push(value.json)
+        let command = value.json
+        commands.push(command)
     }
-    const app = getApp(client,guildID);
-    const commands = await client.api.applications(client.user.id).commands.put({data:bulk});
 
-    console.log("Ready to receive commands!")
-    const commandID = [];
-    for(let {id} of commands){
-        commandID.push(id)
-    }
-    return commandID
+    return commands
 }
 
 async function bulkPermissions(client,functions,commands,guildID){

@@ -1,5 +1,5 @@
 
-const { MessageEmbed } = require('discord.js');
+const { EmbedBuilder } = require('discord.js');
 const path = require('path');
 const fs = require('fs');
 
@@ -15,7 +15,7 @@ module.exports= class shopEntity{
     }
 
     displayShop(){
-        const embed = new MessageEmbed();
+        const embed = new EmbedBuilder();
         embed.setTitle("Shop List").setDescription("To buy just type /buy <item>")
 
         for(let key of this.shopItens.keys()){
@@ -37,7 +37,7 @@ module.exports= class shopEntity{
 
     }
 
-        buy(item, args,client,user,guild,member,interaction){
+    buy(item, args,client,user,guild,member,interaction){
         if(!this.shopItens.has(item)){
             return "Item not found in shop list";
         }

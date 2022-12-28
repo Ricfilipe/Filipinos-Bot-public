@@ -1,5 +1,5 @@
 const { Octokit } = require("@octokit/core");
-const { MessageEmbed } = require('discord.js');
+const { EmbedBuilder } = require('discord.js');
 require('dotenv').config();
 const TOKEN_GITHUB = process.env.TOKEN_GITHUB;
 
@@ -27,7 +27,7 @@ module.exports= {
             title: param,
             body: "Requested by "+ user.tag +"\n"
         });
-        const embed = new MessageEmbed();
+        const embed = new EmbedBuilder();
         embed.setAuthor({name:"Filipinos-Bot",iconURL: guild.iconURL()})
             .setTitle("Added new Request")
             .setDescription(param)

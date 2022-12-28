@@ -1,4 +1,4 @@
-const { MessageEmbed } = require('discord.js');
+const { EmbedBuilder } = require('discord.js');
 const Discord = require('discord.js');
 const bot = new Discord.Client();
 
@@ -9,7 +9,7 @@ module.exports = async function quotes(msg,suf){
         if (msg.mentions.users.size) {
             const taggedUser = msg.mentions.users.first();
             const quote = await QuoteDB.getQuote(taggedUser.id);
-            const embed = new MessageEmbed().setAuthor(taggedUser.tag,taggedUser.avatarURL())
+            const embed = new EmbedBuilder().setAuthor(taggedUser.tag,taggedUser.avatarURL())
                 .setDescription(quote[0])
                 .setColor('#883434').setFooter(""+quote[1]);
             await msg.channel.send(embed);
@@ -58,7 +58,7 @@ module.exports = async function quotes(msg,suf){
                 msg.channel.send('Please tag a valid user!');
             } else {
                 const taggedUser = msg.mentions.users.first();
-                const embed = new MessageEmbed().setAuthor(taggedUser.tag,taggedUser.avatarURL());
+                const embed = new EmbedBuilder().setAuthor(taggedUser.tag,taggedUser.avatarURL());
                 const list = await QuoteDB.listQuote(taggedUser.id);
                 for (let [key, value] of list) {
                     embed.addField(value,key);

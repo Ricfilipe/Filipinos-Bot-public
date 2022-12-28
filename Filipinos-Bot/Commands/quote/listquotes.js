@@ -1,5 +1,5 @@
 const QuoteDB = require('../../Modules/Connections/QuoteDB');
-const { MessageEmbed } = require('discord.js');
+const { EmbedBuilder } = require('discord.js');
 const Discord = require('discord.js');
 
 module.exports= {
@@ -16,7 +16,7 @@ module.exports= {
     callback: async ({client, interaction, args, guild, member, user}) => {
         const taggedUserId = args.person;
         const taggedUser = await client.users.fetch(taggedUserId)
-        const embed = new MessageEmbed().setAuthor(taggedUser.tag,taggedUser.avatarURL());
+        const embed = new EmbedBuilder().setAuthor(taggedUser.tag,taggedUser.avatarURL());
         const list = await QuoteDB.listQuote(taggedUserId,guild.id);
         for (let [key, value] of list) {
                 embed.addField(value,key);

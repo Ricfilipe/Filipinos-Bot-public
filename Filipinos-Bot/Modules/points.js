@@ -1,6 +1,6 @@
 
 
-const { MessageEmbed } = require('discord.js');
+const { EmbedBuilder } = require('discord.js');
 
 module.exports = function getPoints( msg ){
     if (msg.content.startsWith('!points')) {

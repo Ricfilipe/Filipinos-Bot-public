@@ -1,5 +1,5 @@
 const GambleDB = require('../../Modules/Connections/GambleDB');
-const { MessageEmbed } = require('discord.js');
+const { EmbedBuilder } = require('discord.js');
 
 module.exports= {
     json: {
@@ -11,7 +11,7 @@ module.exports= {
         const pos = [":one:", ":two:", ":three:", ":four:", ":five:", ":six:", ":seven:", ":eight:", ":nine:", ":keycap_ten:"];
         const leaders = await GambleDB.top10();
         const space = "\u200B \u200B \u200B \u200B \u200B \u200B \u200B \u200B \u200B ";
-        const embed = new MessageEmbed()
+        const embed = new EmbedBuilder()
             .setColor('#d2c153')
             .setAuthor({name:"Leaderboard"})
             .setDescription("TOP 10");

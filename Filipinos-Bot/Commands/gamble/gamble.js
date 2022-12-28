@@ -1,5 +1,5 @@
 
-const { MessageEmbed, MessageActionRow, MessageButton, Modal, TextInputComponent, MessageSelectMenu} = require('discord.js');
+const { EmbedBuilder, MessageActionRow, MessageButton, Modal, TextInputComponent, MessageSelectMenu} = require('discord.js');
 const responseInterface = require("../../Modules/response")
 const Discord = require('discord.js');
 const Admin = require('../../Modules/administration');
@@ -389,7 +389,7 @@ async function endGambling(interaction) {
 
 function update(client,interaction,gambaEnt) {
     gambaEnt.currentTime = gambaEnt.currentTime+ updateTime;
-    const embed = new MessageEmbed()
+    const embed = new EmbedBuilder()
         .setColor('#d2c153')
         .setTitle(gambaEnt.title)
         .setAuthor({name:'Gamba'})
@@ -492,7 +492,7 @@ class GambleEntity {
 
     winnerScreen(winner){
         this.currentTime = this.currentTime+ updateTime;
-        const embed = new MessageEmbed()
+        const embed = new EmbedBuilder()
             .setColor('#f10e0e')
             .setTitle(this.title+' (Finished)')
             .setAuthor({name:'Gamba'})
@@ -536,7 +536,7 @@ class GambleEntity {
 }
 
 function createEmbedGamba(user, title,time,choices){
-    const gambleEmbed = new MessageEmbed()
+    const gambleEmbed = new EmbedBuilder()
         .setColor('#d2c153')
         .setTitle(title)
         .setAuthor({name:'Gamba'})

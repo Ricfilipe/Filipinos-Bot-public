@@ -1,4 +1,4 @@
-const { MessageEmbed } = require('discord.js');
+const { EmbedBuilder } = require('discord.js');
 const request = require('request-promise-native');
 const responseInterface = require("../../Modules/response")
 
@@ -79,7 +79,7 @@ module.exports= {
                 color = colorToHex[color];
             }
 
-            embed = new MessageEmbed();
+            embed = new EmbedBuilder();
                 embed.setAuthor({name:"Anilist",iconURL:"https://anilist.co/img/icons/apple-touch-icon.png"})
                 .setURL(body.data.user.siteUrl)
                 .setTitle(body.data.user.name + "'s Profile")

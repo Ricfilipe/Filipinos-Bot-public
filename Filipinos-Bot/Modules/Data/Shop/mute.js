@@ -1,4 +1,4 @@
-const { MessageEmbed } = require('discord.js');
+const { EmbedBuilder } = require('discord.js');
 const shopItem = require("../shopItem")
 
 
@@ -47,7 +47,7 @@ module.exports= class  shopMute extends shopItem {
     }
 
     getDisplayBuyMessage(msg,param,user){
-        const embed = new MessageEmbed();
+        const embed = new EmbedBuilder();
         embed.setTitle( param[1][0].displayName +" has been muted for "+ param[1][1] + " seconds")
         embed.setAuthor({name:"Muted by "+user.tag,iconURL: user.avatarURL()})
 
@@ -56,7 +56,6 @@ module.exports= class  shopMute extends shopItem {
     }
 
     mute(target,time){
-
         this.repeatTask(unmutePerson,mutePerson,time*1000,0,[target,time])
         console.log("mute "+ target + " for " + time);
     }

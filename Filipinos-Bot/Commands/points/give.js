@@ -1,4 +1,4 @@
-const { MessageEmbed } = require('discord.js');
+const { EmbedBuilder } = require('discord.js');
 const GambleUser = require('../../Modules/Data/gambleUser');
 
 module.exports= {
@@ -26,7 +26,7 @@ module.exports= {
             guser.removePoints(args.getInteger('points'));
             const taggedUser = args.getUser('person')
             let guser2 = new GambleUser(taggedUser.id);
-            const embed = new MessageEmbed()
+            const embed = new EmbedBuilder()
                 .setColor('#45b538')
                 .setAuthor({name:taggedUser.tag, iconURL:taggedUser.avatarURL()})
                 .setDescription(":gift: Has received " + args.getInteger('points') + " points from " + user.tag + " :gift:");

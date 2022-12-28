@@ -2,8 +2,8 @@ const TOKEN = process.env.TOKEN;
 require('dotenv').config();
 
 
-const Discord = require('discord.js');
-const bot = new Discord.Client({intents:[Discord.Intents.FLAGS.GUILD_MEMBERS, Discord.Intents.FLAGS.GUILDS]});
+const {Client,GatewayIntentBits, Partials }= require('discord.js');
+const bot = new Client({ intents: [GatewayIntentBits.Guilds, GatewayIntentBits.GuildMessages, GatewayIntentBits.GuildVoiceStates] });
 const GambleDB = require('./Connections/GambleDB');
 
 
