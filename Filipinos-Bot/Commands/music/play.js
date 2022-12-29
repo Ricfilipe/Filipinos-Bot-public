@@ -27,33 +27,50 @@ module.exports= {
 
         if(member.voice.channel)
         {
-            const song = await player.search(interaction.options.getString("query"),
-                {
-                    limit: 1,
-                    safeSearch: false
-                });
+            let song = ""
+
+            if(interaction.options.getString("query").startsWith("https://www.youtube.com/watch?v="))
+            {
+                song = interaction.options.getString("query")
+            }
+            else
+            {
+                song = await player.search(interaction.options.getString("query"),
+                    {
+                        limit: 1,
+                        safeSearch: false
+                    });
+                song = song[0]
+            }
 
             if(!player.menu[guild.id])
             {
                 player.menu[guild.id] = new MusicMenu(guild, interaction.channel, player);
             }
 
+            await interaction.deferReply();
 
-            player.play(member.voice.channel, song[0], {
+            await player.play(member.voice.channel, song, {
                 member: member,
                 textChannel: interaction.channel
             })
 
+
+            const songQueue = player.getQueue(interaction.guild.id).songs
+            song = songQueue[songQueue.length-1]
+
             const embed = new EmbedBuilder()
                 .setAuthor({name:"Added music to queue",iconURL:guild.iconURL()})
-                .setTitle(song[0].name)
-                .setURL(song[0].url)
-                .setThumbnail(song[0].thumbnail)
+                .setTitle(song.name)
+                .setURL(song.url)
+                .setThumbnail(song.thumbnail)
                 .setFooter({text:"Requested by " + member.displayName, iconURL: user.avatarURL()})
-                .setDescription("Duration: " + song[0].formattedDuration)
+                .setDescription("Duration: " + song.formattedDuration)
                 .setColor("#2268f5")
 
-            return {embeds:[embed]};
+            await interaction.editReply({embeds:[embed]});
+
+            return null;
         }
 
         return  {content:`You need to enter voice channel!`, ephemeral:true};
@@ -63,6 +80,8 @@ module.exports= {
         pause : pause,
         play : play,
         previous : previous,
+        pageDownQueue: pageDownQueue,
+        pageUpQueue: pageUpQueue
     },
 }
 
@@ -89,4 +108,15 @@ async function previous({interaction, player}) {
         return {content: "Theres is no previous song", ephemeral:true};
     }
 }
+
+async function pageDownQueue(interaction, player)
+{
+    player.menu[interaction.guild.id].pageUp(player.getQueue(interaction.guild.id).songs)
+}
+
+async function pageUpQueue(interaction, player)
+{
+    player.menu[interaction.guild.id].pageDown(player.getQueue(interaction.guild.id).songs)
+}
+
 
