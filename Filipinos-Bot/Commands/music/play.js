@@ -1,10 +1,6 @@
 
 const {EmbedBuilder, SlashCommandBuilder} = require("discord.js");
-const {joinVoiceChannel} = require("@discordjs/voice");
-const SearchResultType = require("distube");
-const SearchResult = require("distube");
-
-
+const MusicMenu = require("../../Modules/musicMenu");
 
 module.exports= {
     data:
@@ -37,7 +33,13 @@ module.exports= {
                     safeSearch: false
                 });
 
-            player.play(member.voice.channel, song , {
+            if(!player.menu[guild.id])
+            {
+                player.menu[guild.id] = new MusicMenu(guild, interaction.channel, player);
+            }
+
+
+            player.play(member.voice.channel, song[0], {
                 member: member,
                 textChannel: interaction.channel
             })
@@ -49,10 +51,42 @@ module.exports= {
                 .setThumbnail(song[0].thumbnail)
                 .setFooter({text:"Requested by " + member.displayName, iconURL: user.avatarURL()})
                 .setDescription("Duration: " + song[0].formattedDuration)
+                .setColor("#2268f5")
 
             return {embeds:[embed]};
         }
 
         return  {content:`You need to enter voice channel!`, ephemeral:true};
+    },
+    buttons:
+    {
+        pause : pause,
+        play : play,
+        previous : previous,
+    },
+}
+
+async function pause({interaction, player}) {
+    player.getQueue(interaction.guild.id).pause()
+    player.menu[interaction.guild.id].updateMenu()
+    return {content: "Pause Music", ephemeral:true};
+}
+
+async function play({interaction, player}) {
+    player.getQueue(interaction.guild.id).resume();
+    player.menu[interaction.guild.id].updateMenu()
+    return {content: "Resume Music", ephemeral:true};
+}
+
+async function previous({interaction, player}) {
+    try{
+        await player.getQueue(interaction.guild.id).previous();
+        player.menu[interaction.guild.id].updateMenu()
+        return {content: "Previous Music", ephemeral:true};
+    }
+    catch(x)
+    {
+        return {content: "Theres is no previous song", ephemeral:true};
     }
 }
+

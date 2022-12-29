@@ -5,25 +5,17 @@ const TOKEN = process.env.TOKEN;
 
 var pathToFfmpeg = require('ffmpeg-static');
 console.log(pathToFfmpeg);
-
 const AdministrationDB = require('./Modules/Connections/AdministrationDB');
 const CommandLoader = require('./CommandLoader');
 const gambling = require('./Modules/gambling');
-
 const admin = require('./Modules/administration');
-
 const shop = require('./Modules/shop');
 
 const currentGamba = [];
 
-
-
-
 const suffix = new Map();
 
-
 let commandLoader;
-
 
 bot.login(TOKEN);
 

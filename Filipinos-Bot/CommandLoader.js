@@ -24,6 +24,9 @@ module.exports =class CommandLoader{
             ]
         })
 
+        // initiate menu
+        this.player.menu = {}
+
         this.buttons = {}
 
         this.rest = new REST({ version: '10' }).setToken(TOKEN);
@@ -46,7 +49,7 @@ module.exports =class CommandLoader{
         bulkCommands(client,this.functions,this);
 
         client.on('interactionCreate', async (interaction)=>{
-            if (interaction.isCommand() || interaction.isUserContextMenu()) {
+            if (interaction.isCommand() || interaction.isContextMenuCommand()) {
 
 
                 const options = interaction.options;
@@ -82,7 +85,9 @@ module.exports =class CommandLoader{
                 for (const [key, value] of Object.entries(this.functions)) {
                     if (value.buttons && value.buttons[interaction.customId])
                     {
-                        let response = await value.buttons[interaction.customId](interaction)
+                        let response = await value.buttons[interaction.customId]({
+                            interaction: interaction,
+                            player: this.player})
                         if (response) {
                             await interaction.reply(response)
                         }
@@ -103,6 +108,31 @@ module.exports =class CommandLoader{
                 }
             }
         })
+
+        this.player.on('initQueue', (queue, song) =>{
+            this.player.menu[queue.id].createMenu()
+        })
+
+        this.player.on('addSong', (queue, song) =>{
+            this.player.menu[queue.id].updateMenu()
+        })
+
+        this.player.on('playSong', (queue, song) =>{
+            this.player.menu[queue.id].updateMenu()
+        })
+
+        this.player.on('disconnect', (queue, song) => {
+            queue.stop()
+            this.player.menu[queue.id].cleanUp()
+            delete this.player.menu[queue.id]
+        })
+
+        this.player.on('empty', (queue, song) => {
+            queue.stop()
+            this.player.menu[queue.id].cleanUp()
+            delete this.player.menu[queue.id]
+        })
+
         this.client = client;
 
 
