@@ -1,5 +1,4 @@
-ARG BUILD_FROM=node:gallium-bullseye-slim
-FROM $BUILD_FROM
+FROM node:gallium-bullseye-slim
 
 ENV \
     CARGO_NET_GIT_FETCH_WITH_CLI=true \
