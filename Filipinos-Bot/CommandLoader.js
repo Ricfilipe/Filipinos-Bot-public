@@ -110,22 +110,27 @@ module.exports =class CommandLoader{
         })
 
         this.player.on('initQueue', (queue, song) =>{
+            console.log("Initiate queue")
             this.player.menu[queue.id].createMenu()
         })
 
         this.player.on('addSong', (queue, song) =>{
+            console.log("Added song")
             this.player.menu[queue.id].updateMenu()
         })
 
         this.player.on('playSong', (queue, song) =>{
+            console.log("Playing Song")
             this.player.menu[queue.id].updateMenu()
         })
 
         this.player.on('disconnect', (queue, song) => {
+            console.log("Disconnected")
             queue.stop()
         })
 
         this.player.on('deleteQueue', (queue, song) => {
+            console.log("Queue deleted")
             if(this.player.menu[queue.id])
             {
                 this.player.menu[queue.id].cleanUp()
