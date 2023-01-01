@@ -9,33 +9,19 @@ function distributePoints(v, k ,map){
     GambleDB.distributePoints(v);
 }
 
-module.exports = class PointDistributor {
-    constructor(servers) {
-        this.servers = servers
-
-        async function points(servers){
-            await GambleDB.gettable();
+async function points(){
+    await GambleDB.gettable();
 
 
-            function distrubute(item, index, arr)
-            {
-                const list = bot.guilds.cache.get(item);
-                if(list) {
-                    list.members.cache.forEach(distributePoints);
-                }else{
-                    bot.login(TOKEN);
-                    bot.guilds.fetch(item);
-                }
-            }
-
-            servers.forEach(distrubute)
-        }
-        points(this.servers);
-        setInterval(points, 60000, this.servers);
-    }
-
-    addNewServer(server)
-    {
-        this.servers.push(server)
+    const list = bot.guilds.cache.get('252110350047117313');
+    if(list) {
+        list.members.cache.forEach(distributePoints);
+    }else{
+        bot.login(TOKEN);
+        bot.guilds.fetch('252110350047117313');
     }
 }
+points();
+setInterval(points, 60000);
+
+module.exports ={}

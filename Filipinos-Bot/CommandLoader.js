@@ -123,14 +123,14 @@ module.exports =class CommandLoader{
 
         this.player.on('disconnect', (queue, song) => {
             queue.stop()
+            this.player.menu[queue.id].cleanUp()
+            delete this.player.menu[queue.id]
         })
 
-        this.player.on('deleteQueue', (queue, song) => {
-            if(this.player.menu[queue.id])
-            {
-                this.player.menu[queue.id].cleanUp()
-                delete this.player.menu[queue.id]
-            }
+        this.player.on('empty', (queue, song) => {
+            queue.stop()
+            this.player.menu[queue.id].cleanUp()
+            delete this.player.menu[queue.id]
         })
 
         this.client = client;

@@ -37,6 +37,12 @@ async function stop({interaction, player}) {
         .setAuthor({name:"Stoped music",iconURL:interaction.guild.iconURL()})
         .setColor("#2268f5")
 
+    if(player.menu[interaction.guild.id])
+    {
+        player.menu[interaction.guild.id].cleanUp()
+        delete player.menu[interaction.guild.id]
+    }
+
     return {embeds:[embed]};
 }
 

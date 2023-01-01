@@ -7,7 +7,7 @@ var pathToFfmpeg = require('ffmpeg-static');
 console.log(pathToFfmpeg);
 const AdministrationDB = require('./Modules/Connections/AdministrationDB');
 const CommandLoader = require('./CommandLoader');
-const PointDistributor = require('./Modules/gambling');
+const gambling = require('./Modules/gambling');
 const admin = require('./Modules/administration');
 const shop = require('./Modules/shop');
 
@@ -16,22 +16,18 @@ const currentGamba = [];
 const suffix = new Map();
 
 let commandLoader;
-let pointDistributor
 
 bot.login(TOKEN);
 
 bot.on('ready',  async () => {
 
-  const guilds = bot.guilds.cache.map(guild => guild.id)
-  commandLoader = new   CommandLoader (bot,"Commands",guilds)
-  pointDistributor = new PointDistributor(guilds)
+  commandLoader = new   CommandLoader (bot,"Commands",bot.guilds.cache.map(guild => guild.id))
+
   console.info(`Logged in as ${bot.user.tag}!`);
 });
 
 bot.on("guildCreate", (guild) => {
-  console.log("Detected new server "+ guild.id)
   commandLoader.addNewGuild(guild.id);
-  pointDistributor.addNewGuild(guild.id);
 });
 
 
