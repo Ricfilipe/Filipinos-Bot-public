@@ -138,6 +138,10 @@ module.exports =class CommandLoader{
             }
         })
 
+        this.player.on('error', (queue, song) => {
+            console.log("Error detected")
+        })
+
         this.client = client;
 
 
