@@ -1,0 +1,8 @@
+build_from:
+  aarch64: node:gallium-bullseye-slim
+  amd64: node:gallium-bullseye-slim
+  armhf: node:gallium-bullseye-slim
+  armv7: node:gallium-bullseye-slim
+  i386: node:gallium-bullseye-slim
+codenotary:
+  signer: ricfilipe1@gmail.com

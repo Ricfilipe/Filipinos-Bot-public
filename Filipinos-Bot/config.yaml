@@ -1,9 +1,9 @@
-version: 1.1.9
+version: 1.1.10
 slug: filipinos_bot
 name: Filipinos Bot
 description: Filipinos Discord Bot
 url: https://github.com/Ricfilipe/Filipinos-Bot-public
-codenotary: notary@home-assistant.io
+codenotary: ricfilipe1@gmail.com
 advanced: true
 init: false
 arch:
