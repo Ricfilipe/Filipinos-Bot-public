@@ -1,8 +1,6 @@
-build_from:
-  aarch64: node:gallium-bullseye-slim
-  amd64: node:gallium-bullseye-slim
-  armhf: node:gallium-bullseye-slim
-  armv7: node:gallium-bullseye-slim
-  i386: node:gallium-bullseye-slim
+args:
+  BASHIO_VERSION: 0.14.3
+  TEMPIO_VERSION: 2021.09.0
+  S6_OVERLAY_VERSION: 3.1.2.1
 codenotary:
   signer: ricfilipe1@gmail.com
