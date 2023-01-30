@@ -29,6 +29,8 @@ module.exports= {
         {
             let song = ""
 
+            await interaction.deferReply();
+
             if(interaction.options.getString("query").startsWith("https://www.youtube.com/watch?v="))
             {
                 song = interaction.options.getString("query")
@@ -47,8 +49,6 @@ module.exports= {
             {
                 player.menu[guild.id] = new MusicMenu(guild, interaction.channel, player);
             }
-
-            await interaction.deferReply();
 
             await player.play(member.voice.channel, song, {
                 member: member,
