@@ -21,9 +21,9 @@ module.exports= {
             auth: TOKEN_GITHUB,
         });
 
-        const { data } = await octokit.request("POST /repos/Ricfilipe/Filipinos-Bot/issues",{
+        const { data } = await octokit.request("POST /repos/Ricfilipe/Filipinos-Bot-public/issues",{
             owner: 'Ricfilipe',
-            repo: 'Filipinos-Bot',
+            repo: 'Filipinos-Bot-public',
             title: param,
             body: "Requested by "+ user.tag +"\n"
         });

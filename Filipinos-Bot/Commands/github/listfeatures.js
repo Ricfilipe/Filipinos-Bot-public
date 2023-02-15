@@ -14,7 +14,7 @@ module.exports= {
             auth: TOKEN_GITHUB,
         });
 
-        const { data } = await octokit.request("/repos/Ricfilipe/Filipinos-Bot/issues");
+        const { data } = await octokit.request("/repos/Ricfilipe/Filipinos-Bot-public/issues");
         const embed =  new EmbedBuilder();
         embed.setAuthor({name:"Filipinos-Bot",iconURL:guild.iconURL()})
             .setTitle("All Requested Features")
