@@ -21,7 +21,7 @@ module.exports= {
 
         let cnt = "";
         for(let i = 0;i<data.length;i++){
-            embed.addField("• #"+data[i].number+" "+data[i].title,""+data[i].body.split("\n")[0]|| "Requested through github");
+            embed.addFields({name: "• #"+data[i].number+" "+data[i].title, value: ""+data[i].body.split("\n")[0]|| "Requested through github"});
             cnt = cnt+ data[i].title+"\n"
         }
 

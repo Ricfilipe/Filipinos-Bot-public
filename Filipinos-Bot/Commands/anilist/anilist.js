@@ -103,7 +103,7 @@ module.exports= {
 
             }
             embed.setDescription(description+"\n\u200b")
-            embed.addField("Last Activity:", "\u200b");
+            embed.addFields({name: "Last Activity:", value: "\u200b"});
 
             const lastActivityVariables={
                 id: body.data.user.id
@@ -115,7 +115,7 @@ module.exports= {
                     progress = activity.progress;
                 }
 
-                embed.addField("• " +activity.media.title.romaji,"\u200b \u200b "+activity.status+ " "+progress)
+                embed.addFields({name: "• " +activity.media.title.romaji, value: "\u200b \u200b "+activity.status+ " "+progress})
             }
 
 

@@ -410,9 +410,9 @@ function update(client,interaction,gambaEnt) {
 
     for (let i = 1; i-1< gambaEnt.choices.length; i++) {
         if(gambaEnt.bets[i-1]){
-            embed.addField( '#'+ i +' '+gambaEnt.choices[i-1],gambaEnt.bets[i-1]+' ('+gambaEnt.bets[i-1]*100/gambaEnt.total+'%)',true);
+            embed.addFields( {name: '#'+ i +' '+gambaEnt.choices[i-1], value: gambaEnt.bets[i-1]+' ('+gambaEnt.bets[i-1]*100/gambaEnt.total+'%)',inline: true});
         }else{
-            embed.addField( '#'+ i +' '+gambaEnt.choices[i-1],0+' ('+0+'%)',true);
+            embed.addFields( {name: '#'+ i +' '+gambaEnt.choices[i-1], value: 0+' ('+0+'%)',inline: true});
         }
     }
 
@@ -513,17 +513,17 @@ class GambleEntity {
         for (let i = 1; i-1< this.choices.length; i++) {
             if(i === winner) {
                 if (this.bets[i - 1]) {
-                    embed.addField(':white_check_mark: #' + i + ' ' + this.choices[i - 1], this.bets[i - 1] + ' (' + this.bets[i - 1] * 100 / this.total + '%)', true);
+                    embed.addFields({name: ':white_check_mark: #' + i + ' ' + this.choices[i - 1], value: this.bets[i - 1] + ' (' + this.bets[i - 1] * 100 / this.total + '%)', inline: true});
                 } else {
-                    embed.addField(':white_check_mark: #' + i + ' ' + this.choices[i - 1], 0 + ' (' + 0 + '%)', true);
+                    embed.addFields({name: ':white_check_mark: #' + i + ' ' + this.choices[i - 1], value: 0 + ' (' + 0 + '%)', inline: true});
                 }
 
             }else{
                 if (this.bets[i - 1]) {
 
-                    embed.addField('#' + i + ' ~~' + this.choices[i - 1]+"~~", this.bets[i - 1] + ' (' + this.bets[i - 1] * 100 / this.total + '%)', true);
+                    embed.addFields({name: '#' + i + ' ~~' + this.choices[i - 1]+"~~", value: this.bets[i - 1] + ' (' + this.bets[i - 1] * 100 / this.total + '%)', inline: true});
                 } else {
-                    embed.addField('#' + i + ' ~~' + this.choices[i - 1]+"~~", 0 + ' (' + 0 + '%)', true);
+                    embed.addFields({name: '#' + i + ' ~~' + this.choices[i - 1]+"~~", value: 0 + ' (' + 0 + '%)', inline: true});
                 }
 
             }
@@ -546,7 +546,7 @@ function createEmbedGamba(user, title,time,choices){
         .setFooter({text:'Created by ' + user.tag, iconURL:user.avatarURL()});
     let i = 1;
     for (let choice of choices) {
-        gambleEmbed.addField( '#'+ i +' '+choice,'0 (0%)',true);
+        gambleEmbed.addFields( {name: '#'+ i +' '+choice,value: '0 (0%)',inline: true});
         i = i+1;
     }
 

@@ -14,12 +14,12 @@ module.exports= {
         }]
     },
     callback: async ({client, interaction, args, guild, member, user}) => {
-        const taggedUserId = args.person;
+        const taggedUserId = args.getUser("person").id;
         const taggedUser = await client.users.fetch(taggedUserId)
-        const embed = new EmbedBuilder().setAuthor(taggedUser.tag,taggedUser.avatarURL());
+        const embed = new EmbedBuilder().setAuthor({name: taggedUser.tag,iconURL: taggedUser.avatarURL()});
         const list = await QuoteDB.listQuote(taggedUserId,guild.id);
-        for (let [key, value] of list) {
-                embed.addField(value,key);
+        for (let [key, val] of list) {
+                embed.addFields({name: val, value: key.toString()});
         }
         return {embeds:[embed]};
     },

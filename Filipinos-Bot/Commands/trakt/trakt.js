@@ -80,7 +80,7 @@ module.exports= {
 
             const currentTime = new Date();
 
-            embed.addField("Recently Watched:", "\u200b");
+            embed.addFields({name: "Recently Watched:",value: "\u200b"});
             for(let entry of jsonWatched) {
                 let watchedTime = new Date(entry.watched_at)
                 let timeMessage = watchedTime.toLocaleDateString()
@@ -117,19 +117,21 @@ module.exports= {
                     }
                 }
                 if(entry.type === 'movie') {
-                    embed.addField("• "+entry.movie.title + " ("+entry.movie.year+")","\u200b \u200b" +
-                        " "+ entry.action+"ed "+timeMessage+" "+
-                        "[[IMDb]](https://www.imdb.com/title/"+ entry.movie.ids.imdb +" 'Link to IMDB') " +
-                        "[[Trakt]](https://trakt.tv/movies/"+ entry.movie.ids.trakt +" 'Link to Trakt') "
-                        );
+                    embed.addFields({
+                        name: "• "+entry.movie.title + " (" + entry.movie.year + ")", value: "\u200b \u200b" +
+                                " " + entry.action + "ed " + timeMessage + " " +
+                            "[[IMDb]](https://www.imdb.com/title/" + entry.movie.ids.imdb + " 'Link to IMDB') " +
+                            "[[Trakt]](https://trakt.tv/movies/" + entry.movie.ids.trakt + " 'Link to Trakt') "
+                    });
                 }else { // or episode
 
-                    embed.addField("• "+entry.show.title + " ("+entry.show.year+")" + " S"+entry.episode.season+
-                        " E"+entry.episode.number,"\u200b \u200b " +
-                        " "+ entry.action+"ed "+timeMessage+" "+
-                        "[[IMDb]](https://www.imdb.com/title/"+ entry.show.ids.imdb +" 'Link to IMDB') " +
-                        "[[Trakt]](https://trakt.tv/shows/"+ entry.show.ids.trakt +" 'Link to Trakt') "
-                        );
+                    embed.addFields({
+                        name: "• "+entry.show.title + " (" + entry.show.year + ")" + " S" + entry.episode.season +
+                            " E" + entry.episode.number, value: "\u200b \u200b " +
+                                " " + entry.action + "ed " + timeMessage + " " +
+                            "[[IMDb]](https://www.imdb.com/title/" + entry.show.ids.imdb + " 'Link to IMDB') " +
+                            "[[Trakt]](https://trakt.tv/shows/" + entry.show.ids.trakt + " 'Link to Trakt') "
+                    });
                 }
             }
 

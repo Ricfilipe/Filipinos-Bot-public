@@ -19,7 +19,7 @@ module.exports= class shopEntity{
         embed.setTitle("Shop List").setDescription("To buy just type /buy <item>")
 
         for(let key of this.shopItens.keys()){
-            embed.addField(this.shopItens.get(key).getBuyCommand(),this.shopItens.get(key).getDescription());
+            embed.addFields({name: this.shopItens.get(key).getBuyCommand(), value: this.shopItens.get(key).getDescription()});
 
         }
         return embed;

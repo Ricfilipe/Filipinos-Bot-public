@@ -61,7 +61,7 @@ module.exports = async function quotes(msg,suf){
                 const embed = new EmbedBuilder().setAuthor(taggedUser.tag,taggedUser.avatarURL());
                 const list = await QuoteDB.listQuote(taggedUser.id);
                 for (let [key, value] of list) {
-                    embed.addField(value,key);
+                    embed.addFields({name: value,value: key});
                 }
                 await msg.channel.send(embed);
             }
