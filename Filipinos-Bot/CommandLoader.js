@@ -222,8 +222,13 @@ async function bulkCommands(client,functions,cmdLoader,guildID,rest){
         // The put method is used to fully refresh all commands in the guild with the current set
         const data = await cmdLoader.rest.put(
             Routes.applicationCommands(client.user.id),
-            { body: commands },
+            { body: commands},
         );
+
+        cmdLoader.rest.put(Routes.applicationGuildCommands(client.user.id, "252110350047117313"), { body: [] })
+            .then(() => console.log('Successfully deleted all guild commands.'))
+            .catch(console.error);
+
 
         console.log(`Successfully reloaded ${data.length} application (/) commands.`);
     } catch (error) {

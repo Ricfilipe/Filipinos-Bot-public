@@ -1,4 +1,4 @@
-version: 1.1.13
+version: 1.1.14
 slug: filipinos_bot
 name: Filipinos Bot
 description: Filipinos Discord Bot
@@ -21,6 +21,8 @@ options:
   mongo_pass: pass
   trakt_api_key: API_KEY
   watch_party_api: API_KEY
+  imgflip_user: API_KEY
+  imgflip_pass: API_KEY
 schema:
   mongo_user: str
   mongo_pass: str
@@ -28,3 +30,5 @@ schema:
   github_token: str
   trakt_api_key: str
   watch_party_api: str
+  imgflip_user: str
+  imgflip_pass: str
