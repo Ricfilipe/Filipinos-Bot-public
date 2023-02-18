@@ -4,7 +4,7 @@ const QuoteDB = require('../../Modules/Connections/QuoteDB');
 module.exports= {
     json: {
         "name": "remquote",
-        "description": "Lists all quotes from someone",
+        "description": "Removes a quote from someone",
         "options":[            {
             "name": "quote",
             "description": "Quote ID",
@@ -19,5 +19,6 @@ module.exports= {
             }else{
                 return {content:'Quote not found...'}
             }
-    },
+    }, permissions:["admin","bot-owner"]
+
 }

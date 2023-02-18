@@ -26,5 +26,5 @@ module.exports= {
         response="Added quote";
 
         return {content:response};
-}, permission:["admin","bot-owner"]
+}, permissions:["admin","bot-owner"]
 }

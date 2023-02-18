@@ -5,7 +5,7 @@ const path = require('path');
 const responseInterface = require('./Modules/response')
 const AdministrationDB = require('./Modules/Connections/AdministrationDB');
 const {Player} = require("discord-player");
-const { REST, Routes } = require('discord.js');
+const { REST, Routes, Embed, EmbedBuilder} = require('discord.js');
 const { DisTube } = require('distube')
 const { YtDlpPlugin } = require('@distube/yt-dlp')
 const TOKEN = process.env.TOKEN;
@@ -64,16 +64,26 @@ module.exports =class CommandLoader{
                 let response;
                 for (const [key, value] of Object.entries(this.functions)) {
                     if (key.toLowerCase() === command) {
-                        response = await value.callback({
-                            client: client,
-                            interaction: interaction,
-                            args: options,
-                            guild: guild,
-                            user: user,
-                            member: member,
-                            commandLoader: this,
-                            player: this.player
-                        })
+                        if(value.permissions && ! await checkPermissions(value.permissions, member, guild))
+                        {
+                            const embed = new EmbedBuilder().setColor('#ff0000')
+                                                            .setAuthor({name:"You don't have permissions to use this command!", iconURL:guild.iconURL()})
+
+                            response = {embeds: [embed], ephemeral:true}
+                        }
+                        else
+                        {
+                            response = await value.callback({
+                                client: client,
+                                interaction: interaction,
+                                args: options,
+                                guild: guild,
+                                user: user,
+                                member: member,
+                                commandLoader: this,
+                                player: this.player
+                            })
+                        }
                     }
                 }
                 if (response) {
@@ -291,4 +301,30 @@ async function generatePermission(client,perms,id,guildid){
 
     return permissions
 
+}
+
+async function checkPermissions(permissions, member, guild) {
+    for(let perm of permissions){
+        switch (perm) {
+            case "admin":
+                const adminRole = await AdministrationDB.getAdminRole(guild.id);
+                if(adminRole && member.roles.cache.some(role => role.id === adminRole)) {
+                    return true
+                }
+                break
+            case "owner":
+               if(member.user.id === guild.ownerID)
+               {
+                   return true
+               }
+                break
+            case "bot-owner":
+                if(member.user.id === owner)
+                {
+                    return true
+                }
+                break
+        }
+    }
+    return false;
 }
