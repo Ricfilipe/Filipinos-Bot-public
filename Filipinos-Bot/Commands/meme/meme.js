@@ -56,7 +56,7 @@ module.exports= {
         captions = captions.split(";")
         if( !/^\d+$/.test(templateId)) // Checks if its only numbers
         {
-            templateId = MemeDB.getIdFromName(templateId,guild.id)
+            templateId = await MemeDB.getIdFromName(templateId,guild.id)
         }
 
         try {
