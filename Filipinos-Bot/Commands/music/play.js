@@ -118,5 +118,3 @@ async function pageUpQueue(interaction, player)
 {
     player.menu[interaction.guild.id].pageDown(player.getQueue(interaction.guild.id).songs)
 }
-
-

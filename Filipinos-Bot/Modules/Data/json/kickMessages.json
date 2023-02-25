@@ -1,0 +1,18 @@
+{
+  "kick": ["$1 took out $2.", "$1 hired hit on $2", "$1 send $2 to the exit."],
+  "random kick": ["$1 missed the punch on $2 and hit $3.",
+                  "Opps, it seems $1 hit the wrong target...",
+                  "$1 just team killed $3"],
+  "failed kick": ["$1 just missed a point blank shot",
+                  "$1 just missed a 80% chance shot. What a loser!",
+                  "Come on, is $1 even trying to hit $2?"],
+  "self kick": ["$1 put an end to is own misery, while thinking about $2",
+                "$1 killed himself after discovering $2 does not love him anymore",
+                "While trying to kill $2, $1 had an accident and lost conscience"],
+  "self deafen": ["$1 was in accident and no longer can speak.",
+                  "After failing to kick $2, $1 decided taking a vow of silence.",
+                  "$1 just got the wind knocked out of him/her"],
+  "kick everyone": ["$1 was tired of being the quiet kid...",
+                    "$1 last word were 'I like you don't go to discord tomorrow'",
+                    "An earthquake started in $3!", "PENTAKIL!", "$1 just called 'Order 66'."]
+}
