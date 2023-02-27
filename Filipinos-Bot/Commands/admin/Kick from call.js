@@ -10,12 +10,13 @@ const FAILED_TIME=30
 let messages;
 
 const fs = require("fs");
-fs.readFile("Modules/Data/json/kickMessages.json", "utf8", (err, jsonString) => {
+fs.readFile("./Modules/Data/json/kickMessages.json", "utf8", (err, jsonString) => {
     if (err) {
         console.log("File read failed:", err);
         return;
     }
     messages = JSON.parse(jsonString)
+    console.log("Loaded messages: "+jsonString)
 });
 
 module.exports= {
