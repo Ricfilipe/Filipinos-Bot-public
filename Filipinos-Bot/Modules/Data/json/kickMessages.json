@@ -9,7 +9,7 @@
   "self kick": ["$1 put an end to is own misery, while thinking about $2",
                 "$1 killed himself after discovering $2 does not love him anymore",
                 "While trying to kill $2, $1 had an accident and lost conscience"],
-  "self deafen": ["$1 was in accident and no longer can speak.",
+  "self mute": ["$1 was in accident and no longer can speak.",
                   "After failing to kick $2, $1 decided taking a vow of silence.",
                   "$1 just got the wind knocked out of him/her"],
   "kick everyone": ["$1 was tired of being the quiet kid...",
