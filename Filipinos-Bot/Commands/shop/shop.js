@@ -16,8 +16,8 @@ module.exports= {
         let guser = new GambleUser(user.id);
 
         let embed = shopEntity.displayShop();
-        embed.setAuthor("Filipinos-Bot",guild.iconURL())
-            .setFooter( user.tag+" has " +guser.getPoints()+" points",user.avatarURL());
+        embed.setAuthor({name:"Filipinos-Bot",iconURL: guild.iconURL()})
+            .setFooter( {text:user.tag+" has " +guser.getPoints()+" points",iconURL:user.avatarURL()});
 
         return {embeds:[embed]};
     }
