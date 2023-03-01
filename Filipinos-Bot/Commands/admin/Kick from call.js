@@ -46,7 +46,7 @@ module.exports= {
             else if(!nextTime[guild.id] || !nextTime[guild.id][user.id] || nextTime[guild.id][user.id] < currentTime)
         {
             const adminRole = await AdministrationDB.getAdminRole(guild.id);
-            if(adminRole && member.roles.cache.some(role => role.id === adminRole)) {
+            if(!(adminRole && member.roles.cache.some(role => role.id === adminRole))) {
                 addTimeout(guild.id, user.id, new Date(currentTime.getTime() + NON_ADMIN_TIME*1000))
             }
 
