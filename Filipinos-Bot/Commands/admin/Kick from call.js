@@ -71,7 +71,8 @@ module.exports= {
                 // kick someone at random
                 let member_list = []
 
-                guild.channels.get(member.voice.channel.id).members.forEach((member).forEach(member => {
+                let voiceChannel = guild.channels.cache.find(channel => channel.id == member.voice.channel.id)
+                voiceChannel.members.forEach((member => {
                     member_list.push(member)
                 }))
                 const random_member = member_list[Math.round(Math.random()*member_list.length-1)]
@@ -94,8 +95,9 @@ module.exports= {
             {
                 //kick everyone
                 embed.setAuthor({ name: getRandomMessage("kick everyone", member.displayName, target_member.displayName, guild.name), iconURL: guild.iconURL()})
-                guild.channels.get(member.voice.channel.id).members.forEach((member).forEach(member => {
-                    member.voice.disconnect()
+                let voiceChannel = guild.channels.cache.find(channel => channel.id == member.voice.channel.id)
+                voiceChannel.members.forEach((member => {
+                    member.disconnect()
                 }))
             }
         }
