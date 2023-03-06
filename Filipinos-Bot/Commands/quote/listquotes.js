@@ -15,13 +15,15 @@ module.exports= {
     },
     callback: async ({client, interaction, args, guild, member, user}) => {
         const taggedUserId = args.getUser("person").id;
+        await interaction.deferReply();
         const taggedUser = await client.users.fetch(taggedUserId)
         const embed = new EmbedBuilder().setAuthor({name: taggedUser.tag,iconURL: taggedUser.avatarURL()});
         const list = await QuoteDB.listQuote(taggedUserId,guild.id);
         for (let [key, val] of list) {
                 embed.addFields({name: val, value: key.toString()});
         }
-        return {embeds:[embed]};
+        await interaction.editReply({embeds:[embed]});
+        return null;
     },
 }
 

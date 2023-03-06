@@ -1,5 +1,5 @@
 {
-  "kick": ["$1 took out $2.", "$1 hired hit on $2", "$1 send $2 to the exit."],
+  "kick": ["$1 took out $2.", "$1 hired hit on $2", "$1 sent $2 to the exit."],
   "random kick": ["$1 missed the punch on $2 and hit $3.",
                   "Opps, it seems $1 hit the wrong target...",
                   "$1 just team killed $3"],

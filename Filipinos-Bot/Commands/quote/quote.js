@@ -15,11 +15,14 @@ module.exports= {
     callback: async ({client, interaction, args, guild, member, user}) => {
         const taggedUser = args.getUser('person');
 
+        await interaction.deferReply();
         const quote = await QuoteDB.getQuote(taggedUser.id,guild.id);
         const embed = new EmbedBuilder().setAuthor({name:taggedUser.tag,iconURL:taggedUser.avatarURL()})
             .setDescription(quote[0])
             .setColor('#883434').setFooter({text:""+quote[1]});
-       return {embeds:[embed]};
+
+        await interaction.editReply({embeds:[embed]});
+        return null;
     },
 
 }

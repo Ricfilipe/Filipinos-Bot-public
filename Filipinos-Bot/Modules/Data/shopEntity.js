@@ -7,7 +7,6 @@ module.exports= class shopEntity{
     constructor() {
         this.shopItens = new Map();
 
-
         getFiles("./Modules/Data/Shop").forEach(file =>{
             const cls = require('./Shop/' +path.basename(file));
             this.shopItens.set(path.basename(file).slice(0,-3) , new cls());
@@ -49,8 +48,6 @@ module.exports= class shopEntity{
     getItems(){
         return this.shopItens.keys()
     }
-
-
 }
 
 function tokenizer(msg, nTokens) {

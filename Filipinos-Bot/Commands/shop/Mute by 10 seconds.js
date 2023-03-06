@@ -13,6 +13,5 @@ module.exports= {
     callback: async ({client, interaction, args, guild, member, user}) => {
         const message = await shopEntity.buy("mute","<@!" + interaction.targetId + "> 10",client,user,guild,member,interaction);
         return message;
-
     }
 }

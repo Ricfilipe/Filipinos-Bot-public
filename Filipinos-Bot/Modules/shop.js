@@ -1,5 +1,5 @@
 const { EmbedBuilder } = require('discord.js');
-const ShopEntity= require('./Data/shopEntity');
+
 const GambleUser= require('./Data/gambleUser');
 
 module.exports = async function(msg,suf){

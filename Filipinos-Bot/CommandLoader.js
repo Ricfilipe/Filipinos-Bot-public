@@ -24,6 +24,8 @@ module.exports =class CommandLoader{
             ]
         })
 
+        this.client = client;
+
         // initiate menu
         this.player.menu = {}
 
@@ -51,7 +53,7 @@ module.exports =class CommandLoader{
         client.on('interactionCreate', async (interaction)=>{
             if (interaction.isCommand() || interaction.isContextMenuCommand()) {
 
-
+                this.guildsCommands = {}
                 const options = interaction.options;
                 const name = interaction.commandName;
                 const command = name.toLowerCase()
