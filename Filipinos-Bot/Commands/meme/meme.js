@@ -78,10 +78,3 @@ module.exports= {
         return null
     }
 }
-
-// TODO: Move translation to DB
-dictionary
-    =
-    {
-        "Boss":"442694127"
-    }
