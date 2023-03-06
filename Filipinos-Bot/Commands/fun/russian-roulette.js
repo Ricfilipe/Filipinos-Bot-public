@@ -36,7 +36,7 @@ module.exports= {
             if(!activeRoulettes[guild.id])
             {
                 let roulette =  new RussianRouletteMenu(commandLoader, guild, interaction.channel, punishment)
-                activeRoulettes[guild.id] = {action: roulette, channelId: member.voice.id}
+                activeRoulettes[guild.id] = {action: roulette, channelId: member.voice.channel.id}
                 embed.setAuthor({ name: "A roulette has started", iconURL: guild.iconURL() })
                 error = false
 
@@ -84,7 +84,7 @@ async function selfShoot({interaction, player}) {
         {
             embed.setAuthor({ name: "You must join the voice channel.", iconURL: interaction.guild.iconURL() })
         }
-        else if(activeRoulettes[interaction.guild.id].channelId === interaction.member.voice.id)
+        else if(activeRoulettes[interaction.guild.id].channelId === interaction.member.voice.channel.id)
         {
             embed = await activeRoulettes[interaction.guild.id].action.shoot(interaction.member, interaction.member)
             if(activeRoulettes[interaction.guild.id].action.hasEnded())

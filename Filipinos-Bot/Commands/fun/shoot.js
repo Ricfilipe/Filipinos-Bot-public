@@ -22,7 +22,7 @@ module.exports= {
             {
                 embed.setAuthor({ name: "You must join the voice channel.", iconURL: guild.iconURL() })
             }
-            else if(activeRoulettes[guild.id].channelId === member.voice.id)
+            else if(activeRoulettes[guild.id].channelId === member.voice.channel.id)
             {
                 if(activeRoulettes[guild.id].action.isGunHolder(member)) {
                     embed = await activeRoulettes[guild.id].action.shoot(member, target)
