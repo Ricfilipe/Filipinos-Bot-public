@@ -1,5 +1,5 @@
 const { EmbedBuilder } = require('discord.js');
-const request = require('request-promise-native');
+const urllib = require("urllib");
 require('dotenv').config();
 const TRAKT_API_KEY = process.env.TRAKT_API_KEY;
 
@@ -19,48 +19,63 @@ module.exports= {
     callback: async ({client,interaction ,args,guild,member,user}) => {
         let embed =""
 
-        const bodyStats = await request .get({
-            url: 'https://api.trakt.tv/users/'+args.getString("name")+'/stats',
+        const bodyStatsRequest = await urllib.request(
+            'https://api.trakt.tv/users/'+args.getString("name")+'/stats',
+            {
+                method: "GET",
+                headers: {
+                'Content-Type': 'application/json',
+                'trakt-api-version': '2',
+                'trakt-api-key': TRAKT_API_KEY
+            }});
+
+        let bodyStats;
+        if(bodyStatsRequest.status === 200)
+        {
+            bodyStats = bodyStatsRequest.data
+        }
+        else
+        {
+            console.error(bodyStatsRequest.res.statusText)
+        }
+
+        const bodyProfileRequest = await urllib.request('https://api.trakt.tv/users/'+args.getString("name")+'?extended=full',
+        {
+            method: "GET",
             headers: {
                 'Content-Type': 'application/json',
                 'trakt-api-version': '2',
                 'trakt-api-key': TRAKT_API_KEY
-            }},
-            (error) => {
-                if (error) {
-                    console.error(error)
+        }});
 
-                }
-            })
+        let bodyProfile;
+        if(bodyProfileRequest.status === 200)
+        {
+            bodyProfile = bodyProfileRequest.data
+        }
+        else
+        {
+            console.error(bodyProfileRequest.res.statusText)
+        }
 
-        const bodyProfile = await request.get({
-                url: 'https://api.trakt.tv/users/'+args.getString("name")+'?extended=full',
+        const bodyWatchedRequest = await urllib.request('https://api.trakt.tv/users/'+args.getString("name")+'/history//?page={1}&limit={10}',
+            {
+                method: "GET",
                 headers: {
                     'Content-Type': 'application/json',
                     'trakt-api-version': '2',
                     'trakt-api-key': TRAKT_API_KEY
-                }},
-            (error) => {
-                if (error) {
-                    console.error(error)
+                }});
 
-                }
-            })
-
-        const bodyWatched = await request.get({
-                url: 'https://api.trakt.tv/users/'+args.getString("name")+'/history//?page={1}&limit={10}',
-                headers: {
-                    'Content-Type': 'application/json',
-                    'trakt-api-version': '2',
-                    'trakt-api-key': TRAKT_API_KEY
-                }},
-            (error) => {
-                if (error) {
-                    console.error(error)
-
-                }
-            })
-
+        let bodyWatched;
+        if(bodyWatchedRequest.status === 200)
+        {
+            bodyWatched = bodyWatchedRequest.data
+        }
+        else
+        {
+            console.error(bodyWatchedRequest.res.statusText)
+        }
 
 
         if(bodyStats && bodyProfile) {

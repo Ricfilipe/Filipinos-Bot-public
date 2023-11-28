@@ -1,5 +1,5 @@
 const { EmbedBuilder } = require('discord.js');
-const request = require('request-promise-native');
+const urllib = require("urllib");
 const responseInterface = require("../../Modules/response")
 
 const genre_per_line=2;
@@ -53,21 +53,27 @@ module.exports= {
             name: args.getString("name")
         };
 
-        const body = await request.post(
+        const response = await urllib.request(
             'https://graphql.anilist.co',
             {
-                json: {
+                method:"POST",
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                content:  JSON.stringify({
                     query: userQuery,
                     variables: variables
-                },
-            },
-            (error) => {
-                if (error) {
-                    console.error(error)
+                })})
 
-                }
-
-            })
+        let body;
+        if(response.status !== 200)
+        {
+            console.error(response.res.statusText);
+        }
+        else
+        {
+            body = JSON.parse(response.data)
+        }
 
 
         let embed =""
@@ -180,19 +186,26 @@ const lastActivityQuery = `
 
 
 async function  getActivities(variables){
-    return await request.post(
+     const response = await urllib.request(
         'https://graphql.anilist.co',
         {
-            json: {
+            method:"POST",
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            content:  JSON.stringify({
                 query: lastActivityQuery,
                 variables: variables
-            },
-        },
-        (error) => {
-            if (error) {
-                console.error(error)
-
-            }
-
+            }),
         })
+
+    if(response.status !== 200)
+    {
+        console.error(response.res.statusText);
+        return undefined
+    }
+    else
+    {
+        return JSON.parse(response.data)
+    }
 }
