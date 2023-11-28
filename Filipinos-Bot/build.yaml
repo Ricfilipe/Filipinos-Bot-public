@@ -1,6 +1,6 @@
 args:
   BASHIO_VERSION: 0.14.3
   TEMPIO_VERSION: 2021.09.0
-  S6_OVERLAY_VERSION: 3.1.2.1
+  S6_OVERLAY_VERSION: 3.1.6.2
 codenotary:
   signer: ricfilipe1@gmail.com

@@ -27,7 +27,6 @@ COPY Modules/ /Modules/
 COPY CommandLoader.js /
 COPY index.js /
 COPY package.json /
-COPY package-lock.json /
 COPY Procfile /
 COPY discord-bot-sitepoint.iml /
 COPY run.sh /
