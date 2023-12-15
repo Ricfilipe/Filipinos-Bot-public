@@ -50,25 +50,33 @@ module.exports= {
                 player.menu[guild.id] = new MusicMenu(guild, interaction.channel, player);
             }
 
-            await player.play(member.voice.channel, song, {
-                member: member,
-                textChannel: interaction.channel
-            })
+            try {
 
 
-            const songQueue = player.getQueue(interaction.guild.id).songs
-            song = songQueue[songQueue.length-1]
+                await player.play(member.voice.channel, song, {
+                    member: member,
+                    textChannel: interaction.channel
+                })
 
-            const embed = new EmbedBuilder()
-                .setAuthor({name:"Added music to queue",iconURL:guild.iconURL()})
-                .setTitle(song.name)
-                .setURL(song.url)
-                .setThumbnail(song.thumbnail)
-                .setFooter({text:"Requested by " + member.displayName, iconURL: user.avatarURL()})
-                .setDescription("Duration: " + song.formattedDuration)
-                .setColor("#2268f5")
 
-            await interaction.editReply({embeds:[embed]});
+                const songQueue = player.getQueue(interaction.guild.id).songs
+                song = songQueue[songQueue.length - 1]
+
+                const embed = new EmbedBuilder()
+                    .setAuthor({name: "Added music to queue", iconURL: guild.iconURL()})
+                    .setTitle(song.name)
+                    .setURL(song.url)
+                    .setThumbnail(song.thumbnail)
+                    .setFooter({text: "Requested by " + member.displayName, iconURL: user.avatarURL()})
+                    .setDescription("Duration: " + song.formattedDuration)
+                    .setColor("#2268f5")
+
+                await interaction.editReply({embeds: [embed]});
+            }
+            catch (e) {
+                console.log(e)
+                await interaction.editReply({content:`Something went wrong while adding the music!`, ephemeral:true});
+            }
 
             return null;
         }
