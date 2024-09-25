@@ -64,7 +64,8 @@ RUN \
         curl \
         ca-certificates \
         xz-utils\
-        python3
+        python3\
+        build-essential
 
 RUN mkdir -p /usr/share/man/man1 \
     \
