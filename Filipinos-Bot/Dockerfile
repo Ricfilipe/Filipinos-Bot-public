@@ -1,5 +1,5 @@
 ARG BUILD_FROM
-FROM node:gallium-bullseye-slim
+FROM node:current-bullseye-slim
 
 ENV \
     CARGO_NET_GIT_FETCH_WITH_CLI=true \
