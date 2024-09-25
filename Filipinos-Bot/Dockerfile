@@ -105,7 +105,7 @@ RUN mkdir -p /usr/share/man/man1 \
 WORKDIR /
 ENTRYPOINT ["/init"]
 
-RUN cd / && npm install
+RUN cd / && npm install --no-audit
 RUN chmod a+x /run.sh
 # Entrypoint & CMD
 
