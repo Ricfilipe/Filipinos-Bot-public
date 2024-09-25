@@ -63,7 +63,8 @@ RUN \
         tzdata \
         curl \
         ca-certificates \
-        xz-utils
+        xz-utils\
+        python3.11
 
 RUN mkdir -p /usr/share/man/man1 \
     \
