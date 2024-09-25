@@ -64,7 +64,7 @@ RUN \
         curl \
         ca-certificates \
         xz-utils\
-        python3.11
+        python3
 
 RUN mkdir -p /usr/share/man/man1 \
     \
