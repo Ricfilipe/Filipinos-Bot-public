@@ -21,7 +21,11 @@ module.exports =class CommandLoader{
             emitAddListWhenCreatingQueue: false,
             plugins: [
                 new YtDlpPlugin()
-            ]
+            ],
+            ffmpeg :
+                {
+                    path: require('ffmpeg-static')
+                }
         })
 
         this.client = client;
