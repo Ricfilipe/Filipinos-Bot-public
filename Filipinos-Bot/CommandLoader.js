@@ -15,7 +15,6 @@ module.exports =class CommandLoader{
     constructor(client, commandDir,guilds) {
 
         this.player = new DisTube(client, {
-            leaveOnStop: false,
             emitNewSongOnly: true,
             emitAddSongWhenCreatingQueue: false,
             emitAddListWhenCreatingQueue: false,
@@ -127,7 +126,6 @@ module.exports =class CommandLoader{
 
         this.player.on('initQueue', (queue, song) =>{
             console.log("Initiate queue")
-            this.player.menu[queue.id].createMenu()
         })
 
         this.player.on('addSong', (queue, song) =>{
@@ -154,8 +152,8 @@ module.exports =class CommandLoader{
             }
         })
 
-        this.player.on('error', (queue, song) => {
-            console.log("Error detected")
+        this.player.on('error', (e, queue, song) => {
+            console.log(`An error encountered: ${e}`)
         })
 
         this.client = client;

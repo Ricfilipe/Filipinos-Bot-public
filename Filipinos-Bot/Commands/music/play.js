@@ -1,6 +1,8 @@
 
 const {EmbedBuilder, SlashCommandBuilder} = require("discord.js");
 const MusicMenu = require("../../Modules/musicMenu");
+const { YouTubePlugin } =require("@distube/youtube");
+const youtubePlugin = new YouTubePlugin();
 
 module.exports= {
     data:
@@ -31,18 +33,18 @@ module.exports= {
 
             await interaction.deferReply();
 
-            if(interaction.options.getString("query").startsWith("https://www.youtube.com/watch?v="))
+            if(interaction.options.getString("query").startsWith("https://www.youtu"))
             {
                 song = interaction.options.getString("query")
             }
             else
             {
-                song = await player.search(interaction.options.getString("query"),
+                song = await youtubePlugin.search(interaction.options.getString("query"),
                     {
                         limit: 1,
                         safeSearch: false
                     });
-                song = song[0]
+                song = song[0].url
             }
 
             if(!player.menu[guild.id])

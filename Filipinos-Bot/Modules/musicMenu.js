@@ -47,6 +47,10 @@ module.exports =class MusicMenu{
                 const row = this.generateAction(queue)
                 this.messageMenu.edit({embeds: [embed], components:[row]})
             }
+            else
+            {
+                await this.createMenu()
+            }
 
 
             //Automatically go up a page when songs are removed
