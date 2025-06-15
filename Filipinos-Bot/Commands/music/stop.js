@@ -32,7 +32,8 @@ module.exports= {
 async function stop({interaction, player}) {
     const queue = player.getQueue(interaction.guild.id)
     if (!queue) return {content:`There is nothing in the queue right now!`, ephemeral:true}
-    queue.stop()
+    await queue.stop()
+    queue.voice.leave()
     const embed = new EmbedBuilder()
         .setAuthor({name:"Stoped music",iconURL:interaction.guild.iconURL()})
         .setColor("#2268f5")

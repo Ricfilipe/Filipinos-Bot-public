@@ -50,8 +50,6 @@ module.exports= {
             }
 
             try {
-
-
                 await player.play(member.voice.channel, song, {
                     member: member,
                     textChannel: interaction.channel
