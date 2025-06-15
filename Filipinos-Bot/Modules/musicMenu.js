@@ -130,26 +130,22 @@ module.exports =class MusicMenu{
 
     genreteQueue(queuedSongs)
     {
-        let songsNames = []
-        let requester = []
-        let duration = []
+        let embed = new EmbedBuilder()
+            .setColor("#2268f5")
+            .setTitle('Songs Queued:')
+            .setFooter({ text: "Page " + this.page + "/"+ Math.ceil(queuedSongs.length/this.songPerPage)})
 
         for (let i = (this.page-1)*this.songPerPage ; i<=this.page*this.songPerPage && i<queuedSongs.length; i++)
         {
-            songsNames.push("[`"+ queuedSongs[i].name+ "`]("+ queuedSongs[i].url + ")")
-            requester.push("`"+queuedSongs[i].member.displayName+"`")
-            duration.push("`"+queuedSongs[i].formattedDuration+"`")
+            const songsName = (queuedSongs[i].name)
+            const requester= ("`"+queuedSongs[i].member.displayName+"`")
+            const duration = ("`"+queuedSongs[i].formattedDuration+"`")
+            embed.addFields(
+                    { name: songsName, value: "Duration: " + duration + "\tRequested by: " + requester + "\t(" + "[`link`]("+ queuedSongs[i].url + ")"+")"}
+                )
         }
 
-        return new EmbedBuilder()
-            .setColor("#2268f5")
-            .setTitle('Songs Queued:')
-            .addFields(
-                { name: 'Song', value: songsNames.join("\n"),  inline: true  },
-                { name: 'Requested by', value: requester.join("\n") ,  inline: true },
-                { name: 'Duration', value: duration.join("\n"),  inline: true }
-            )
-            .setFooter({ text: "Page " + this.page + "/"+ Math.ceil(queuedSongs.length/this.songPerPage)})
+        return embed
     }
 
     generateQueueAction(queuedSongs)

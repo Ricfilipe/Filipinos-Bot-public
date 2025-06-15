@@ -27,18 +27,16 @@ module.exports= {
     },
     callback: async ({client, interaction, args, guild, member, user, player}) => {
 
-        if(member.voice.channel)
-        {
+        if (member.voice.channel) {
             let song = ""
 
             await interaction.deferReply();
 
-            if(interaction.options.getString("query").startsWith("https://www.youtu"))
-            {
+           const  query = interaction.options.getString("query")
+
+            if (query.startsWith("https://www.youtube.com") || query.startsWith("https://youtu")) {
                 song = interaction.options.getString("query")
-            }
-            else
-            {
+            } else {
                 song = await youtubePlugin.search(interaction.options.getString("query"),
                     {
                         limit: 1,
@@ -47,8 +45,7 @@ module.exports= {
                 song = song[0].url
             }
 
-            if(!player.menu[guild.id])
-            {
+            if (!player.menu[guild.id]) {
                 player.menu[guild.id] = new MusicMenu(guild, interaction.channel, player);
             }
 
@@ -74,10 +71,9 @@ module.exports= {
                     .setColor("#2268f5")
 
                 await interaction.editReply({embeds: [embed]});
-            }
-            catch (e) {
+            } catch (e) {
                 console.log(e)
-                await interaction.editReply({content:`Something went wrong while adding the music!`, ephemeral:true});
+                await interaction.editReply({content: `Something went wrong while adding the music!`, ephemeral: true});
             }
 
             return null;
@@ -96,13 +92,13 @@ module.exports= {
 }
 
 async function pause({interaction, player}) {
-    player.getQueue(interaction.guild.id).pause()
+    await player.getQueue(interaction.guild.id).pause()
     player.menu[interaction.guild.id].updateMenu()
     return {content: "Pause Music", ephemeral:true};
 }
 
 async function play({interaction, player}) {
-    player.getQueue(interaction.guild.id).resume();
+    await player.getQueue(interaction.guild.id).resume();
     player.menu[interaction.guild.id].updateMenu()
     return {content: "Resume Music", ephemeral:true};
 }

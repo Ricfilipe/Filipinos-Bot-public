@@ -7,7 +7,7 @@ const AdministrationDB = require('./Modules/Connections/AdministrationDB');
 const {Player} = require("discord-player");
 const { REST, Routes, Embed, EmbedBuilder} = require('discord.js');
 const { DisTube } = require('distube')
-const { YtDlpPlugin } = require('@distube/yt-dlp')
+const { YouTubePlugin } = require('@distube/youtube')
 const TOKEN = process.env.TOKEN;
 const owner = '136894756985896960';
 
@@ -19,7 +19,7 @@ module.exports =class CommandLoader{
             emitAddSongWhenCreatingQueue: false,
             emitAddListWhenCreatingQueue: false,
             plugins: [
-                new YtDlpPlugin()
+                new YouTubePlugin()
             ],
             ffmpeg :
                 {
