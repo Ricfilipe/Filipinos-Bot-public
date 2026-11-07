@@ -1,5 +1,5 @@
 ARG BUILD_FROM
-FROM node:current-bullseye-slim
+FROM node:current-bookworm-slim
 
 ENV \
     CARGO_NET_GIT_FETCH_WITH_CLI=true \
@@ -31,8 +31,7 @@ COPY Procfile /
 COPY discord-bot-sitepoint.iml /
 COPY run.sh /
 
-# Install base system
-# Default ENV
+# Install base system ENV
 ENV \
     LANG="C.UTF-8" \
     DEBIAN_FRONTEND="noninteractive" \
@@ -42,18 +41,15 @@ ENV \
     S6_CMD_WAIT_FOR_SERVICES=1 \
     S6_SERVICES_READYTIME=50
 
-# Set shell
-SHELL ["/bin/bash", "-o", "pipefail", "-c"]
-
 # Build Args
-ARG BASHIO_VERSION=0.14.3 \
+ARG BASHIO_VERSION=0.14.3
 ARG TEMPIO_VERSION=2021.09.0
 ARG S6_OVERLAY_VERSION=3.1.2.1
 ARG QEMU_CPU
+ARG BUILD_ARCH
 
 # Base system
 WORKDIR /usr/src
-ARG BUILD_ARCH
 
 RUN \
     set -x \
@@ -63,8 +59,8 @@ RUN \
         tzdata \
         curl \
         ca-certificates \
-        xz-utils\
-        python3\
+        xz-utils \
+        python3 \
         build-essential
 
 RUN mkdir -p /usr/share/man/man1 \
@@ -109,7 +105,5 @@ ENTRYPOINT ["/init"]
 
 RUN cd / && npm install --no-audit
 RUN chmod a+x /run.sh
-# Entrypoint & CMD
-
 
 CMD [ "/run.sh" ]
